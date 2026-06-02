@@ -59,6 +59,41 @@ POST http://your-server:3000/mcp
 Authorization: Bearer <jwt-token>
 ```
 
+## Testing
+
+Three test JSON files are included. Before running, edit each file and replace `your-api-key` with the value from your `.env`.
+
+**Step 1 — Check server starts and lists tools:**
+
+```cmd
+node server.js < test-list-tools.json
+```
+
+Expected output: JSON with `query`, `list_tables`, `describe_table`.
+
+**Step 2 — List tables in your database:**
+
+```cmd
+node server.js < test-list-tables.json
+```
+
+Expected output: JSON array of table names.
+
+**Step 3 — Run a query:**
+
+Edit `test-query.json` and replace `your_table` with a real table name, then:
+
+```cmd
+node server.js < test-query.json
+```
+
+Expected output: JSON array of rows.
+
+> **Windows tip:** If `<` redirection doesn't work in cmd, use PowerShell:
+> ```powershell
+> Get-Content test-query.json | node server.js
+> ```
+
 ## Environment variables
 
 | Variable | Required | Description |
